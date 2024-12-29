@@ -1,78 +1,43 @@
-import React, { useCallback, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-    const [roomCode, setRoomCode] = useState()
-    const [name, setName] = useState()
-    const navigate = useNavigate()
+  const [roomCode, setRoomCode] = useState("");
+  const navigate = useNavigate();
 
-    const handleRoomJoin = useCallback(() => {
-        navigate(`room/${roomCode}`)
-    }, [navigate, roomCode])
+  const handleRoomJoin = useCallback(() => {
+    if (roomCode.trim()) {
+      navigate(`room/${roomCode}`);
+    }
+  }, [navigate, roomCode]);
 
-    const styles = {
-        container: {
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          height: "100vh",
-          backgroundColor: "#f5f5f5",
-          padding: "20px",
-        },
-        heading: {
-          fontSize: "24px",
-          fontWeight: "600",
-          color: "#333",
-          marginBottom: "20px",
-        },
-        input: {
-          width: "100%",
-          maxWidth: "400px",
-          padding: "12px",
-          borderRadius: "8px",
-          border: "1px solid #ccc",
-          fontSize: "16px",
-          marginBottom: "16px",
-          outline: "none",
-          boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-        },
-        button: {
-          width: "100%",
-          maxWidth: "400px",
-          padding: "12px",
-          borderRadius: "8px",
-          backgroundColor: "#007bff",
-          color: "#fff",
-          border: "none",
-          fontSize: "16px",
-          fontWeight: "600",
-          cursor: "pointer",
-          transition: "background-color 0.3s ease",
-          textAlign: "center",
-        },
-        buttonHover: {
-          backgroundColor: "#0056b3",
-        },
-      };
-      
 
-    return (
-        <div style={styles.container}>
-            <h2 style={styles.heading}>Join a Room</h2>
-            <input
-                style={styles.input}
-                value={roomCode}
-                onChange={(e) => setRoomCode(e.target.value)}
-                type="text"
-                placeholder="Enter room code"
-            />
-            <button style={styles.button} onClick={handleRoomJoin}>
-                Join Room
-            </button>
+  return (
+    <div >
+      <div>
+        <div className="flex justify-center p-10">
+          <h1 className="text-3xl">Hello, Welcome to OneONone Video Calling App - dekho</h1>
         </div>
+        <div className="flex flex-col justify-center p-10 gap-10">
+          <h2 className="text-3xl text-center">Enter Room Code:</h2>
+          <input
+            className="w-1/2 sm:w-1/3 m-auto p-2 rounded-lg text-black"
+            value={roomCode}
+            onChange={(e) => setRoomCode(e.target.value)}
+            type="text"
+            placeholder="Enter room code(eg. 123456)"
+          />
+          <button
+          type="submit"
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-52 m-auto"
+            onClick={handleRoomJoin}
+          >
+            Join Room
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-    )
-}
-
-export default Home
+export default Home;
